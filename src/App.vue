@@ -1,10 +1,12 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div class="container">
+    <router-view />
+  </div>
+  <nav class="my-2 my-md-0 mr-md-3">
+    <router-link to="/product">Thống Kê</router-link>
   </nav>
-  <router-view/>
 </template>
+
 
 <style>
 #app {
