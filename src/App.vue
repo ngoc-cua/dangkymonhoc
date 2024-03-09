@@ -1,32 +1,22 @@
 <template>
   <div class="container">
     <router-view />
-  </div>
-  <nav class="my-2 my-md-0 mr-md-3">
-    <router-link to="/product">Thống Kê</router-link>
-  </nav>
+  
+  <nav class="my-2 my-md-0 mr-md-3 text-center">
+    <router-link :to="isProductPage ? '/' : '/product'">{{ isProductPage ? 'Back' : 'Thống Kê' }}</router-link>
+  </nav></div>
 </template>
 
+<script>
+export default {
+  computed: {
+    isProductPage() {
+      return this.$route.path === '/product';
+    }
+  }
+}
+</script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
+/* styles here */
 </style>

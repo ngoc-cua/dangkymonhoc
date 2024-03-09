@@ -17,9 +17,9 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: EditView
   },
-   {
+  {
     path: '/product',
-    name: 'product.list',
+    name: 'product.list ',
     component: ProductView
   },
 ]
