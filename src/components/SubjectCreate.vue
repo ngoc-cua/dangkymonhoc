@@ -22,9 +22,9 @@
           </div>
           <div class="col-md-6">
             <label for="course">Môn Học</label>
-            <select v-model="selectedCourse" class="form-control" id="course" required>
+            <select v-model="selectedCourse"  class="form-control" id="course" required>
               <option value="">Chọn Môn Học</option>
-              <option v-for="course in courses" :key="course.id" :value="course.id">{{ course.name }}</option>
+              <option v-for="course in filteredCourses" :key="course.id" :value="course.id">{{ course.name }}</option>
             </select>
           </div>
         </div>
@@ -48,11 +48,25 @@ export default {
       courses: [
         { id: 1, name: 'Môn 1' },
         { id: 2, name: 'Môn 2' },
-        { id: 3, name: 'Môn 3' }
+        { id: 3, name: 'Môn 3' },
+        { id: 4, name: 'Môn 4' },
+        { id: 5, name: 'Môn 5' },
+        { id: 6, name: 'Môn 6' }
       ],
       successMessage: '',
       errorMessage: ''
     };
+  },
+  computed: {
+    filteredCourses() {
+      if (this.semester === '1') {
+        return this.courses.slice(0, 3);
+      } else if (this.semester === '2') {
+        return this.courses.slice(3);
+      } else {
+        return [];
+      }
+    }
   },
   methods: {
     register() {
