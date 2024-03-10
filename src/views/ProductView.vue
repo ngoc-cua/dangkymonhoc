@@ -26,8 +26,8 @@
           <td>{{ registration.semester }}</td>
           <td>{{ getCourseName(registration.courseId) }}</td>
           <td>
-            <router-link :to="'/edit/' + registration.id" class="btn btn-primary me-2">Edit</router-link>
-            <button @click="deleteRegistration(registration.id)" class="btn btn-danger btn-sm">Delete</button>
+            <router-link :to="`/edit/${registration.id}`" class="btn btn-primary me-2">Edit</router-link>
+            <button @click="deleteBook(registration.id)" class="btn btn-danger me-2">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -37,7 +37,7 @@
 
 <script>
 import { onValue } from 'firebase/database';
-import { booksRef } from '@/firebase';
+import { booksRef, deleteBook } from '@/firebase';
 
 export default {
   data() {
@@ -48,8 +48,8 @@ export default {
         { id: 2, name: 'Môn 2' },
         { id: 3, name: 'Môn 3' }
       ],
-      searchText: '', // Biến để lưu trữ MSSV hoặc Học Kỳ được nhập từ người dùng
-      searchType: 'studentID' // Loại tìm kiếm mặc định là MSSV
+      searchText: '',
+      searchType: 'studentID'
     };
   },
   methods: {
@@ -68,27 +68,32 @@ export default {
       const course = this.courses.find(course => course.id === courseId);
       return course ? course.name : '';
     },
- 
+    deleteBook(id) {
+      deleteBook(id)
+        .then(() => {
+          console.log('Book deleted successfully');
+        })
+        .catch(error => {
+          console.error('Error deleting book:', error);
+        });
+    }
   },
   computed: {
     filteredRegistrations() {
-      // Nếu không có searchText hoặc searchType không hợp lệ, trả về tất cả các đăng ký
       if (!this.searchText || !['studentID', 'semester'].includes(this.searchType)) {
         return this.registrations;
       }
-      // Lọc danh sách đăng ký dựa trên searchText và searchType
       return this.registrations.filter(registration => {
-        // Nếu searchType là 'studentID', lọc dựa trên MSSV
         if (this.searchType === 'studentID') {
           return registration.studentID.toLowerCase().includes(this.searchText.toLowerCase());
         }
-        // Nếu searchType là 'semester', lọc dựa trên Học Kỳ
         if (this.searchType === 'semester') {
           return registration.semester.toLowerCase().includes(this.searchText.toLowerCase());
         }
       });
     }
   },
+
   created() {
     this.fetchRegistrations();
   }
