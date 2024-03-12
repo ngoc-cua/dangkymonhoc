@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { booksRef, push } from '@/firebase';
+import { booksRef,push } from '@/firebase';
 
 export default {
   data() {
@@ -93,7 +93,7 @@ export default {
     updateCourses() {
       this.selectedCourse = ''; // Reset selected course when semester changes
     }
-  }
+  },
 };
 </script>
 

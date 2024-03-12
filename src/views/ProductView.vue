@@ -72,6 +72,7 @@ export default {
       return course ? course.name : '';
     },
     deleteBook(id) {
+      if(confirm('Are you sure to delete?'))
       deleteBook(id)
         .then(() => {
           console.log('Book deleted successfully');

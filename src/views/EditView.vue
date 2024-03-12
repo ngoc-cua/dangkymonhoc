@@ -57,9 +57,10 @@
 </template>
 
 <script>
-import { reactive, onMounted, watchEffect } from "vue";
+import { reactive, onMounted} from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { getBook, getCourses, updateBook } from "@/firebase";
+import { getBook,updateBook } from "@/firebase";
+
 
 export default {
   data() {
@@ -94,22 +95,9 @@ export default {
       studentID: "",
       fullName: "",
       semester: "",
-      courseId: "",
+      courseId:"",
     });
-    const courses = reactive([]);
 
-    const loadCourses = async () => {
-      try {
-        const fetchedCourses = await getCourses();
-        courses.splice(0, courses.length, ...fetchedCourses);
-      } catch (error) {
-        console.error("Error loading courses:", error);
-      }
-    };
-
-    watchEffect(() => {
-      loadCourses();
-    });
     onMounted(async () => {
       const registration = await getBook(registrationId);
       form.studentID = registration.studentID;
@@ -117,7 +105,7 @@ export default {
       form.semester = registration.semester;
       form.courseId = registration.courseId;
     });
-
+  
     const update = async () => {
   try {
     await updateBook(registrationId, form);
@@ -131,11 +119,13 @@ export default {
   }
 };
 
+   
     return {
       form,
-      watchEffect,
       update,
     };
+    
   },
+  
 };
 </script>
