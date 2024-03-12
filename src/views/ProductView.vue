@@ -1,37 +1,42 @@
 <template>
-  <div class="container pt-5 pb-5">
+  <div class="container pt-5 pb-5 bg">
+    <h3 class="bounce-text">Danh Sách Sinh Viên</h3><br>
     <!-- Input để nhập MSSV hoặc chọn Học Kỳ -->
-    <input v-model="searchText" type="text" placeholder="Nhập MSSV hoặc Chọn Học Kỳ" class="form-control mb-3" />
-    <select v-model="searchType" class="form-select mb-3">
-      <option value="studentID">MSSV</option>
-      <option value="semester">Học Kỳ</option>
-    </select>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">STT</th>
-          <th scope="col">MSSV</th>
-          <th scope="col">Họ Và Tên</th>
-          <th scope="col">Học Kỳ</th>
-          <th scope="col">Môn Học</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Sử dụng filteredRegistrations thay vì registrations -->
-        <tr v-for="(registration, index) in filteredRegistrations" :key="registration.id">
-          <td>{{ index + 1 }}</td>
-          <td>{{ registration.studentID }}</td>
-          <td>{{ registration.fullName }}</td>
-          <td>{{ registration.semester }}</td>
-          <td>{{ getCourseName(registration.courseId) }}</td>
-          <td>
-            <router-link :to="`/edit/${registration.id}`" class="btn btn-primary me-2">Edit</router-link>
-            <button @click="deleteBook(registration.id)" class="btn btn-danger me-2">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="input-container">
+      <input v-model="searchText" type="text" placeholder="Nhập MSSV hoặc Chọn Học Kỳ" class="form-control mb-3" />
+      <select v-model="searchType" class="form-select mb-3">
+        <option value="studentID">MSSV</option>
+        <option value="semester">Học Kỳ</option>
+      </select>
+    </div>
+    <div class="table-container">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">STT</th>
+            <th scope="col">MSSV</th>
+            <th scope="col">Họ Và Tên</th>
+            <th scope="col">Học Kỳ</th>
+            <th scope="col">Môn Học</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Sử dụng filteredRegistrations thay vì registrations -->
+          <tr v-for="(registration, index) in filteredRegistrations" :key="registration.id">
+            <td>{{ index + 1 }}</td>
+            <td>{{ registration.studentID }}</td>
+            <td>{{ registration.fullName }}</td>
+            <td>{{ registration.semester }}</td>
+            <td>{{ getCourseName(registration.courseId) }}</td>
+            <td>
+              <router-link :to="`/edit/${registration.id}`" class="btn btn-edit me-2">Edit</router-link>
+              <button @click="deleteBook(registration.id)" class="btn btn-delete me-2">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -105,31 +110,41 @@ export default {
 </script>
 
 <style scoped>
-div{
-
-  background: linear-gradient(#ede0cf, #d6ad93);
+.container {
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 10px;
 }
-/* CSS cho input */
+
 .input-container {
-  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* CSS cho select */
-.select-container {
-  margin-bottom: 20px;
-}
-
-/* CSS cho table */
 .table-container {
-  margin-top: 20px;
-}
-table{
-  background-color: #fff;
+  overflow-x: auto;
 }
 
-/* CSS cho nút Edit */
+.table-striped tbody tr:nth-child(odd) {
+  background-color: #f8f9fa;
+}
+
+.table-striped tbody tr:nth-child(even) {
+  background-color: #e9ecef;
+}
+
 .btn-edit {
   background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-delete {
+  background-color: #dc3545;
   color: #fff;
   border: none;
   padding: 6px 12px;
@@ -141,17 +156,25 @@ table{
   background-color: #0056b3;
 }
 
-/* CSS cho nút Delete */
-.btn-delete {
-  background-color: #dc3545;
-  color: #fff;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
 .btn-delete:hover {
   background-color: #bd2130;
+}
+.bg{
+  background-color:#aec2df;
+}
+h3{
+  text-align: center;
+  text-shadow: 1px 2px 4px blue;
+  color:blue;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 </style>
