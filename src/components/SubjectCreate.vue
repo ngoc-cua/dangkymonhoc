@@ -34,7 +34,7 @@
   </div>
 </template>
 <script>
-import { booksRef, push } from '@/firebase';
+import { booksRef,push } from '@/firebase';
 
 export default {
   data() {
@@ -43,11 +43,9 @@ export default {
       studentID: '',
       semester: '',
       selectedCourse: '',
-      courses: [
-        { id: 1, name: 'Môn 1' },
-        { id: 2, name: 'Môn 2' },
-        { id: 3, name: 'Môn 3' }
-      ],
+      courses: [{ id: 1, name: 'Môn 1' },
+      { id: 2, name: 'Môn 2' },
+      { id: 3, name: 'Môn 3' }],
       successMessage: '',
       errorMessage: ''
     };
@@ -77,7 +75,7 @@ export default {
       this.semester = '';
       this.selectedCourse = '';
     }
-  }
+  },
 };
 </script>
 

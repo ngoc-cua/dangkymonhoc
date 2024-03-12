@@ -28,19 +28,10 @@
               </select>
             </td>
             <td>
-              <select
-                class="form-control"
-                id="course"
-                v-model="form.courseId"
-                required
-              >
+              <select class="form-control" id="course" v-model="form.courseId">
                 <option value="">Chọn Môn Học</option>
-                <option
-                  v-for="course in courses"
-                  :key="course.id"
-                  :value="course.id"
-                >
-                  {{ course.name }}
+                <option v-for="course in form" :key="course.id">
+                  {{ course.courseId}}
                 </option>
               </select>
             </td>
@@ -57,9 +48,10 @@
 </template>
 
 <script>
-import { reactive, onMounted, watchEffect } from "vue";
+import { reactive, onMounted} from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { getBook, getCourses, updateBook } from "@/firebase";
+import { getBook,updateBook } from "@/firebase";
+
 
 export default {
   setup() {
@@ -70,22 +62,9 @@ export default {
       studentID: "",
       fullName: "",
       semester: "",
-      courseId: "",
+      courseId:"",
     });
-    const courses = reactive([]);
 
-    const loadCourses = async () => {
-      try {
-        const fetchedCourses = await getCourses();
-        courses.splice(0, courses.length, ...fetchedCourses);
-      } catch (error) {
-        console.error("Error loading courses:", error);
-      }
-    };
-
-    watchEffect(() => {
-      loadCourses();
-    });
     onMounted(async () => {
       const registration = await getBook(registrationId);
       form.studentID = registration.studentID;
@@ -93,7 +72,7 @@ export default {
       form.semester = registration.semester;
       form.courseId = registration.courseId;
     });
-
+  
     const update = async () => {
       try {
         await updateBook(registrationId, form);
@@ -103,12 +82,13 @@ export default {
         console.error("Error updating registration:", error);
       }
     };
-
+  
     return {
       form,
-      watchEffect,
       update,
     };
+    
   },
+  
 };
 </script>
