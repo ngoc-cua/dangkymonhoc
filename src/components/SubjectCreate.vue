@@ -12,7 +12,7 @@
           </div>
           <div class="col-md-6">
             <label for="semester">Học Kỳ</label>
-            <select v-model="semester" class="form-control" id="semester" required>
+            <select v-model="semester" class="form-control" id="semester" required @change="updateCourses">
               <option value="">Chọn Học Kỳ</option>
               <option value="1">Học Kỳ 1</option>
               <option value="2">Học Kỳ 2</option>
@@ -22,7 +22,7 @@
             <label for="course">Môn Học</label>
             <select v-model="selectedCourse" class="form-control" id="course" required>
               <option value="">Chọn Môn Học</option>
-              <option v-for="course in courses" :key="course.id" :value="course.id">{{ course.name }}</option>
+              <option v-for="course in filteredCourses" :key="course.id" :value="course.id">{{ course.name }}</option>
             </select>
           </div>
         </div>
@@ -33,6 +33,7 @@
     <div v-if="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
   </div>
 </template>
+
 <script>
 import { booksRef, push } from '@/firebase';
 
@@ -44,13 +45,25 @@ export default {
       semester: '',
       selectedCourse: '',
       courses: [
-        { id: 1, name: 'Môn 1' },
-        { id: 2, name: 'Môn 2' },
-        { id: 3, name: 'Môn 3' }
+        { id: 1, name: 'Môn 1', semester: 1 },
+        { id: 2, name: 'Môn 2', semester: 1 },
+        { id: 3, name: 'Môn 3', semester: 1 },
+        { id: 4, name: 'Môn 4', semester: 2 },
+        { id: 5, name: 'Môn 5', semester: 2 },
+        { id: 6, name: 'Môn 6', semester: 2 }
       ],
       successMessage: '',
       errorMessage: ''
     };
+  },
+  computed: {
+    filteredCourses() {
+      if (this.semester) {
+        return this.courses.filter(course => course.semester.toString() === this.semester);
+      } else {
+        return [];
+      }
+    }
   },
   methods: {
     register() {
@@ -76,6 +89,9 @@ export default {
       this.studentID = '';
       this.semester = '';
       this.selectedCourse = '';
+    },
+    updateCourses() {
+      this.selectedCourse = ''; // Reset selected course when semester changes
     }
   }
 };

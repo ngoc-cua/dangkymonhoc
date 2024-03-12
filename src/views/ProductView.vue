@@ -46,7 +46,10 @@ export default {
       courses: [
         { id: 1, name: 'Môn 1' },
         { id: 2, name: 'Môn 2' },
-        { id: 3, name: 'Môn 3' }
+        { id: 3, name: 'Môn 3' },
+        { id: 4, name: 'Môn 4' },
+        { id: 5, name: 'Môn 5' },
+        { id: 6, name: 'Môn 6' }
       ],
       searchText: '',
       searchType: 'studentID'
