@@ -20,6 +20,13 @@ const firebaseConfig = {
   export const deleteBook = id => {
     return remove(ref(db, 'books/' + id));
   };
+  export const MonHoc = () => {
+    return [
+      { id: 1, name: 'Môn 1' },
+      { id: 2, name: 'Môn 2' },
+      { id: 3, name: 'Môn 3' }
+    ];
+  };
   export const getBook = (id) => {
     return new Promise((resolve, reject) => {
       onValue(ref(db, `books/${id}`), (snapshot) => {
@@ -33,23 +40,6 @@ const firebaseConfig = {
         reject(error);
       });
     });
-  };
-  export const getCourses = async () => {
-    try {
-      const snapshot = await booksRef.collection("courses").get();
-      const courses = [];
-      snapshot.forEach((doc) => {
-        const course = {
-          id: doc.id,
-          name: doc.data().name,
-        };
-        courses.push(course);
-      });
-      return courses;
-     
-    } catch (error) {
-      throw new Error("Error fetching courses: " + error);
-    }
   };
   export const updateBook = (id, book) => {
     return update(ref(db, `books/${id}`), book);
