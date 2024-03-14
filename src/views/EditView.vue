@@ -129,6 +129,7 @@ export default {
   
 };
 </script>
+
 <style scoped>
 .container {
   max-width: 800px;
@@ -144,13 +145,13 @@ export default {
 
 .table th,
 .table td {
-  padding: 0.75rem;
-  vertical-align: top;
+  padding: 1rem;
+  vertical-align: middle;
   border-top: 1px solid #dee2e6;
 }
 
 .table thead th {
-  vertical-align: bottom;
+  vertical-align: middle;
   border-bottom: 2px solid #dee2e6;
 }
 
@@ -163,27 +164,14 @@ export default {
 }
 
 /* Form */
-.form-control {
-  width: 100%;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
+.form-control,
 .form-select {
   width: 100%;
-  padding: 0.375rem 0.75rem;
+  padding: 0.75rem;
   font-size: 1rem;
   line-height: 1.5;
   color: #495057;
-  background-color: #fff;
-  background-image: none;
+  background-color: #f8f9fa;
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -207,5 +195,14 @@ export default {
   background-color: #c82333;
   border-color: #bd2130;
   box-shadow: 0 0 0 0.2rem rgba(225, 83, 97, 0.5);
+}
+
+.registration-form {
+  margin-top: 2rem;
+}
+
+.registration-form input[type="text"],
+.registration-form select {
+  height: 45px;
 }
 </style>

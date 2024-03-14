@@ -1,17 +1,19 @@
 <template>
   <div>
-    <h2 class="mt-2">Quản Lý Đăng Ký Học Phần</h2>
+    <h2 class="mt-2 text-center">Quản Lý Đăng Ký Học Phần</h2>
     <form class="mt-3" @submit.prevent="register">
       <div class="container div">
         <div class="row mt-4">
           <div class="col-md-6">
+       
             <input v-model="fullName" placeholder="Họ và Tên" type="text" class="form-control" required />
           </div>
           <div class="col-md-6">
+         
             <input v-model="studentID" placeholder="MSSV" type="text" class="form-control" required />
           </div>
           <div class="col-md-6">
-            <label for="semester">Học Kỳ</label>
+            <label for="semester">HỌC KÌ</label>
             <select v-model="semester" class="form-control" id="semester" required @change="updateCourses">
               <option value="">Chọn Học Kỳ</option>
               <option value="1">Học Kỳ 1</option>
@@ -19,14 +21,15 @@
             </select>
           </div>
           <div class="col-md-6">
-            <label for="course">Môn Học</label>
+            <label for="course">MÔN HỌC</label>
             <select v-model="selectedCourse" class="form-control" id="course" required>
               <option value="">Chọn Môn Học</option>
               <option v-for="course in filteredCourses" :key="course.id" :value="course.id">{{ course.name }}</option>
             </select>
           </div>
         </div>
-        <button type="submit" class=" res offset-md-5 mt-3 mb-3">Đăng Ký</button>
+        
+        <button type="submit" class=" res offset-md-5 mt-3 mb-3 text-center">Đăng Ký</button>
       </div>
     </form>
     <div v-if="successMessage" class="alert alert-success">{{ successMessage }}</div>
@@ -117,6 +120,10 @@ button {
   background-color: #ffb9b4;
   font-weight: 10px;
   border: 3px solid #2aafc1;
+
+}
+.res[data-v-338b7148] {
+    margin-left: 598px;
 }
 button:hover {
   color: #fee7ed;
