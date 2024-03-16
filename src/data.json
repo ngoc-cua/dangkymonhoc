@@ -1,0 +1,24 @@
+{
+    "monhoc": [
+      {
+        "id": "1",
+        "tenmh": "Ứng Dụng Web 1",
+        "hk": "Học kỳ 1"
+      },
+      {
+        "id": "2",
+        "tenmh": "Ứng Dụng Web 2",
+        "hk": "Học kỳ 1"
+      },
+      {
+        "id": "3",
+        "tenmh": "CNKT 3",
+        "hk": "Học kỳ 2"
+      },
+      {
+        "id": "4",
+        "tenmh": "CNKT 4",
+        "hk": "Học kỳ 2"
+      }
+    ]
+  }
