@@ -22,7 +22,24 @@ export const Signup = stu => {
   return StudentCollection.add(stu)
 }
 export const deleteStudent = id => {
-  return StudentCollection.doc(id).delete()
+   return new Promise((resolve, reject) => {
+    const confirmation = confirm("Bạn có muốn xóa?");
+    if (confirmation) {
+      StudentCollection.doc(id)
+        .delete()
+        .then(() => {
+          // Xử lý thành công
+          resolve("Xóa thành công");
+        })
+        .catch(error => {
+          // Xử lý lỗi
+          reject("Lỗi khi xóa: " + error.message);
+        });
+    } else {
+      // Người dùng đã hủy bỏ xóa
+      resolve("Hủy bỏ xóa");
+    }
+  });
 }
 
 export const getStudent = async id => {

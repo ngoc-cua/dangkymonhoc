@@ -1,7 +1,11 @@
 <template>
-  <div class="container pt-5 pb-5">
-    <h3 class="bounce-text">Cập Nhật Thông Tin</h3>
-    <br />
+  <h2>Cập Nhật Thông Tin</h2>
+  <div class="row">
+    <div class="loader"></div>
+    <div class="loader"></div>
+    <div class="loader"></div>
+  </div>
+  <div class="container mt-3">
     <form @submit.prevent="update">
       <!-- Input để nhập MSSV hoặc chọn Học Kỳ -->
       <table class="table table-striped">
@@ -21,12 +25,18 @@
             <td><input type="text" v-model="selectedStudent.selectHK" /></td>
             <td>
               <select v-model="selectedStudent.selectMH">
-                <option v-for="monhoc in filteredMonhocs" :key="monhoc.id" :value="monhoc.tenmh">{{ monhoc.tenmh }}</option>
+                <option
+                  v-for="monhoc in filteredMonhocs"
+                  :key="monhoc.id"
+                  :value="monhoc.tenmh"
+                >
+                  {{ monhoc.tenmh }}
+                </option>
               </select>
             </td>
             <td>
-              <button class="btn btn-danger btn-sm" @click="update">
-                Update
+              <button @click="update">
+                <span>Update</span>
               </button>
             </td>
           </tr>
@@ -56,7 +66,7 @@ export default {
 
     onMounted(async () => {
       const studentData = await getStudent(StuID.value);
-      selectedStudent.value = studentData; 
+      selectedStudent.value = studentData;
     });
 
     const update = async () => {
@@ -68,3 +78,167 @@ export default {
   },
 };
 </script>
+<style scoped>
+h2 {
+  font-size: 50px;
+  text-align: center;
+  padding-block: 20px;
+  padding-inline: 20px;
+  border-radius: 10px;
+  -webkit-text-stroke: 5px #90c577;
+  background: linear-gradient(90deg, #e24943, #e24943);
+  background-clip: text;
+  color: transparent;
+  transform: 1s;
+  cursor: pointer;
+}
+
+table tbody {
+  background-color: #accc88;
+}
+table tbody td input {
+  box-shadow: 0 0 4px 4px #00c5a7;
+}
+table tbody td select {
+  box-shadow: 1px 1px 4px 4px #01bda0;
+}
+
+/* Form */
+.form-control,
+.form-select {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+button {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 10px 15px;
+  transition: 0.5s;
+  position: relative;
+  font-size: 10px;
+  background: #e24943;
+  border: none;
+  color: #74a65d;
+  cursor: pointer;
+  border-radius: 5px;
+}
+button:hover {
+  letter-spacing: 0.25em;
+  background: #9739bf;
+  color: #9739bf;
+  box-shadow: 0 0 45px #9739bf;
+}
+button::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: #cdfde5;
+}
+button span {
+  position: relative;
+  z-index: 1;
+}
+
+
+.loader {
+  width: 20px;
+  margin-left: 250px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 8px solid #90c577;
+  animation: l20-1 0.8s infinite linear alternate, l20-2 1.6s infinite linear;
+}
+@keyframes l20-1 {
+  0% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 50% 0%, 50% 0%, 50% 0%, 50% 0%);
+  }
+  12.5% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 0%,
+      100% 0%,
+      100% 0%
+    );
+  }
+  25% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 100%,
+      100% 100%,
+      100% 100%
+    );
+  }
+  50% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+  62.5% {
+    clip-path: polygon(
+      50% 50%,
+      100% 0,
+      100% 0%,
+      100% 0%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+  75% {
+    clip-path: polygon(
+      50% 50%,
+      100% 100%,
+      100% 100%,
+      100% 100%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+  100% {
+    clip-path: polygon(
+      50% 50%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+}
+@keyframes l20-2 {
+  0% {
+    transform: scaleY(1) rotate(0deg);
+  }
+  49.99% {
+    transform: scaleY(1) rotate(135deg);
+  }
+  50% {
+    transform: scaleY(-1) rotate(0deg);
+  }
+  100% {
+    transform: scaleY(-1) rotate(-135deg);
+  }
+}
+</style>
