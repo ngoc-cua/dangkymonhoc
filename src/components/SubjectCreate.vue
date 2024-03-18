@@ -18,6 +18,8 @@
             class="dv"
             width="100"
             required
+            pattern="[0-9]+"
+            title="Vui lòng nhập số"
           />
           <label for="mssv" class="label">MSSV</label>
         </div>
@@ -201,11 +203,11 @@ button:hover span {
   height: 35px;
   width: 100%;
 }
-.select:hover {
+/* .select:hover {
   color: #e24943;
   transform: scale(1.2);
   background-color: #fee7ed;
-}
+} */
 .label {
   position: absolute;
   left: 0.6em;
