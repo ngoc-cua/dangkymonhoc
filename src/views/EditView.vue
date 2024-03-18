@@ -44,6 +44,9 @@
       </table>
     </form>
   </div>
+  <router-link :to="`/`">
+    <a class="link btn-sm me-2">Trang Chủ</a>
+  </router-link>
 </template>
 
 <script>
@@ -147,7 +150,6 @@ button span {
   z-index: 1;
 }
 
-
 .loader {
   width: 20px;
   margin-left: 250px;
@@ -240,5 +242,27 @@ button span {
   100% {
     transform: scaleY(-1) rotate(-135deg);
   }
+}
+
+.link {
+  display: inline-block;
+  font-size: 15px;
+  letter-spacing: 1.6px;
+  color: #00c5a7;
+  /* background: #111; */
+  padding: 10px 30px;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 10px;
+  transition: 0.8s;
+  text-align: center;
+  margin-left: 480px;
+}
+.link:hover {
+  color: #ffd8d9;
+  text-shadow: 0 0 5px #ffd8d9;
+  box-shadow: 0 0 10px #ffd8d9, 0 0 20px #ffd8d9, 0 0 40px #ffd8d9,
+    0 0 80px #ffd8d9, 0 0 160px #ffd8d9;
+  letter-spacing: 4px;
 }
 </style>
