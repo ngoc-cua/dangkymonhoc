@@ -14,7 +14,7 @@
           <input
             v-model="form.mssv"
             id="mssv"
-            type="number"
+            type="text"
             class="dv"
             width="100"
             required
